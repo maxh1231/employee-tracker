@@ -9,7 +9,7 @@ const promptUser = () => {
             type: 'list',
             name: 'action',
             message: 'Chose an option:',
-            choices: ['View Departments', 'View Roles', 'View Employees', 'Add Department', 'Add Role', 'Add Employee']
+            choices: ['View Departments', 'View Roles', 'View Employees', 'Add Department', 'Add Role', 'Add Employee', 'Update Employee']
 
         }
     ])
@@ -18,7 +18,6 @@ const promptUser = () => {
 
         .then((answers) => {
             console.log(answers);
-
             // View Departments
             if (answers.action === 'View Departments') {
                 const sql = `SELECT * FROM department`;
@@ -125,13 +124,54 @@ const promptUser = () => {
                         })
                     }))
             }
+
+            // add Employee
+            if (answers.action === 'Add Employee') {
+                return inquirer.prompt([
+                    {
+                        type: 'input',
+                        name: 'firstName',
+                        message: 'First Name?'
+                    },
+                    {
+                        type: 'input',
+                        name: 'lastName',
+                        message: 'Last Name?'
+                    },
+                    {
+                        type: 'input',
+                        name: 'roleID',
+                        message: 'Role ID?'
+                    },
+                    {
+                        type: 'input',
+                        name: 'managerID',
+                        message: 'Manager id?'
+                    }
+                ])
+                    .then((data => {
+
+
+                        const sql = `INSERT INTO employee (first_name, last_name, role_id, manager_id)
+                        VALUES
+                        ("${data.firstName}", "${data.lastName}", ${data.roleID}, ${data.managerID});`
+
+                        db.query(sql, (err, data) => {
+                            if (err) {
+                                console.log(err);
+                            } else {
+                                console.log('Added Employee');
+                            }
+                        })
+                    }))
+            }
         })
 
 
 }
 
 
-promptUser();
+// promptUser();
 
 // const addDeparment = () => {
 //     return inquirer.prompt([
