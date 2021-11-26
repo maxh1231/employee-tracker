@@ -3,6 +3,8 @@ const cTable = require('console.table');
 const db = require('./db/connection');
 const mysql = require('mysql2');
 
+
+
 const promptUser = () => {
     return inquirer.prompt([
         {
@@ -165,13 +167,44 @@ const promptUser = () => {
                         })
                     }))
             }
+
+            // Update Employee
+            if (answers.action === 'Update Employee') {
+                return inquirer.prompt([
+                    {
+                        type: 'input',
+                        name: 'employeeID',
+                        message: 'Employee ID?'
+                    },
+                    {
+                        type: 'input',
+                        name: 'newRoleID',
+                        message: 'New Role ID?'
+                    }
+                ])
+                    .then((data => {
+
+
+                        const sql = `update employee SET role_id = ${data.newRoleID} WHERE employee_id = ${data.employeeID};`
+
+                        db.query(sql, (err, data) => {
+                            if (err) {
+                                console.log(err);
+                            } else {
+                                console.log('Updated Employee');
+                            }
+                        })
+                    }))
+            }
         })
 
 
 }
 
 
-// promptUser();
+promptUser();
+
+
 
 // const addDeparment = () => {
 //     return inquirer.prompt([
