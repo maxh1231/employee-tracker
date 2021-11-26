@@ -1,3 +1,56 @@
 const inquirer = require('inquirer');
 const cTable = require('console.table');
 const db = require('./db/connection');
+const mysql = require('mysql2');
+
+const promptUser = () => {
+    return inquirer.prompt([
+        {
+            type: 'list',
+            name: 'action',
+            message: 'Chose an option:',
+            choices: ['View Departments', 'View Roles', 'View Employees', 'Add Department', 'Add Role', 'Add Employee']
+
+        }
+    ])
+
+
+
+        .then((answers) => {
+            console.log(answers);
+
+            if (answers.action === 'Add Department') {
+                return inquirer.prompt([
+                    {
+                        type: 'input',
+                        name: 'departmentName',
+                        message: 'Department Name?'
+                    }
+                ])
+            }
+        })
+
+
+}
+
+promptUser();
+
+// const addDeparment = () => {
+//     return inquirer.prompt([
+//         {
+//             type: 'input',
+//             name: 'departmentName',
+//             message: 'Department Name?'
+//         }
+//     ])
+// }
+
+// const initApp = data => {
+//     promptUser();
+
+//     if (data.action === 'Add Department') {
+//         addDeparment();
+//     }
+// }
+
+// initApp();
