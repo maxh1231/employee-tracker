@@ -89,6 +89,42 @@ const promptUser = () => {
                         })
                     }))
             }
+
+            // add Role
+            if (answers.action === 'Add Role') {
+                return inquirer.prompt([
+                    {
+                        type: 'input',
+                        name: 'roleName',
+                        message: 'Role Name?'
+                    },
+                    {
+                        type: 'input',
+                        name: 'salary',
+                        message: 'Salary of Role?'
+                    },
+                    {
+                        type: 'input',
+                        name: 'departmentID',
+                        message: 'Department ID?'
+                    }
+                ])
+                    .then((data => {
+
+
+                        const sql = `INSERT INTO role (title, salary, department_id)
+                        VALUES
+                        ("${data.roleName}", ${data.salary}, ${data.departmentID});`
+
+                        db.query(sql, (err, data) => {
+                            if (err) {
+                                console.log(err);
+                            } else {
+                                console.log('Added Role');
+                            }
+                        })
+                    }))
+            }
         })
 
 
