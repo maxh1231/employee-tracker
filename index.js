@@ -73,6 +73,21 @@ const promptUser = () => {
                         message: 'Department Name?'
                     }
                 ])
+                    .then((data => {
+                        console.log(data.departmentName);
+
+                        const sql = `INSERT INTO department (department_name)
+                        VALUES
+                        ("${data.departmentName}");`
+
+                        db.query(sql, (err, data) => {
+                            if (err) {
+                                console.log(err);
+                            } else {
+                                console.log('Added Department');
+                            }
+                        })
+                    }))
             }
         })
 
