@@ -19,6 +19,7 @@ const promptUser = () => {
         .then((answers) => {
             console.log(answers);
 
+            // View Departments
             if (answers.action === 'View Departments') {
                 const sql = `SELECT * FROM department`;
 
@@ -31,6 +32,21 @@ const promptUser = () => {
                 }
                 )
             }
+
+            // View Roles
+            if (answers.action === 'View Roles') {
+                const sql = `SELECT * FROM role`;
+
+                db.query(sql, (err, data) => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        console.table(data);
+                    }
+                }
+                )
+            }
+
 
             // add Department
             if (answers.action === 'Add Department') {
