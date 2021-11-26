@@ -15,10 +15,10 @@
   ## Installation
   Initialize NPM, install dependencies, initialize app with node index.js
 
-  ## Video Walkthrough
-    [Youtube](https://youtu.be/F5G3RstOkYQ)
+## Video Walkthrough
+[Youtube](https://youtu.be/F5G3RstOkYQ)
 
-  ## License
+## License
   
-    Copyright 2021 maxh1231
-    [MIT License](https://opensource.org/licenses/MIT)
+Copyright 2021 maxh1231
+[MIT License](https://opensource.org/licenses/MIT)
