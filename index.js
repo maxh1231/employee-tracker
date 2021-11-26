@@ -35,7 +35,23 @@ const promptUser = () => {
 
             // View Roles
             if (answers.action === 'View Roles') {
-                const sql = `SELECT * FROM role`;
+                const sql = `SELECT * FROM role INNER JOIN department ON role.department_id = department.department_id`;
+
+                db.query(sql, (err, data) => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        console.table(data);
+                    }
+                }
+                )
+            }
+
+            // View Employees
+            if (answers.action === 'View Employees') {
+                const sql = `SELECT * FROM employee
+                INNER JOIN role ON employee.role_id = role.role_id
+                INNER JOIN department ON role.department_id = department.department_id;  `;
 
                 db.query(sql, (err, data) => {
                     if (err) {
