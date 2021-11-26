@@ -19,6 +19,20 @@ const promptUser = () => {
         .then((answers) => {
             console.log(answers);
 
+            if (answers.action === 'View Departments') {
+                const sql = `SELECT * FROM department`;
+
+                db.query(sql, (err, data) => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        console.table(data);
+                    }
+                }
+                )
+            }
+
+            // add Department
             if (answers.action === 'Add Department') {
                 return inquirer.prompt([
                     {
@@ -32,6 +46,7 @@ const promptUser = () => {
 
 
 }
+
 
 promptUser();
 
